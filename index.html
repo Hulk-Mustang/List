@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="index.css">
+    <title>Shopping List</title>
+    
+
+</head>
+<body>
+    <style>
+        body{
+    font-family: Bradley Hand, cursive	;
+    background-color: rgb(255, 221, 0);
+    text-align: center;
+}
+#text{
+    background-color: transparent;
+    border: none;
+    border-bottom: 3px solid black;
+    outline: none;
+    font-family: Bradley Hand, cursive;
+    font-size: large;
+}
+h1{
+    font-size: 50px;
+}
+.nutton{
+    background-color: rgb(46, 116, 118);
+    border: none;
+    color: rgb(255, 221, 0);
+    border-radius: 10px;
+    height: 25px;
+    width: 50px;
+    cursor: pointer;
+    transition: all .3s;
+}
+img{
+    cursor: pointer;
+}
+h2{
+    cursor: pointer;
+}
+div{
+    margin-top: 10px;
+    font-size: 30px;
+    transition: all .3;
+}
+.now{ 
+    font-size: xx-large;
+}
+.button{
+    height: 25px;
+    width: 50px;
+    background-color: rgb(15, 188, 84);
+    margin-left: 30px;
+    border: none;
+    border-radius: 10px;
+    z-index: 100;
+    cursor: pointer;
+    transition: all .3s;
+}
+.active{
+    text-decoration: line-through;
+}
+.akk{
+    background-color: black;
+    color: rgb(15, 188, 84);
+}
+.ja{
+    width: 400px;
+    background-color: whitesmoke;
+    padding: 50px;
+    border-radius: 20px;
+    margin: 40px auto;
+}
+hr{
+    margin-top: 80px;
+}
+    </style>
+    <div class="ja">
+    <h1>Shopping List</h1>
+        <img src="pen.png" id="pen">
+<input type="text" id="text">
+<button id="btn" class="nutton">Add</button>
+<div id="allIt"></div>
+<hr>
+<p id="total">Total: <b id="num">0</b></p>
+</div>
+<script>
+    const text = document.getElementById('text')
+const pen = document.getElementById('pen')
+const result = document.getElementById('allIt')
+const btn = document.getElementById('btn')
+const total = document.getElementById('num')
+let i = 0
+
+    text.addEventListener('keydown', function(event){
+        if (event.key == 'Enter') {
+            createDeleteElements(text.value)
+        }
+    })
+
+btn.addEventListener('click', (e) => {
+    if(text.value === '')return
+    createDeleteElements(text.value)
+    text.value = ''
+})
+
+pen.addEventListener('click', (e) => {
+    result.textContent = ''
+})
+
+function createDeleteElements(value) {
+
+i++
+
+    const h2 = document.createElement('h2')
+    const button = document.createElement('button')
+
+    h2.className = 'now'
+    h2.textContent = value
+
+
+    button.className = 'button'
+    button.textContent = 'delete'
+    h2.appendChild(button)
+
+button.addEventListener('click', e => {
+    result.removeChild(h2)
+    i--
+})
+
+h2.addEventListener('click', (e) => {
+    h2.classList.toggle('active')
+    button.classList.toggle('akk')
+})
+
+total.textContent = i
+
+    result.appendChild(h2)
+}
+
+
+</script>
+</body>
+</html>
